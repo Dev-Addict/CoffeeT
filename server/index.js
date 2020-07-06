@@ -9,6 +9,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const next = require('next');
 
+const APIRouter = require('./routes/APIRouter');
+
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
@@ -27,6 +29,8 @@ app.prepare()
             res.header("Access-Control-Allow-Methods", "*");
             next();
         });
+
+        server.use('/api/v1', APIRouter);
 
         server.get('*', (req, res) => {
             return handle(req, res);
