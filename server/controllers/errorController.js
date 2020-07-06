@@ -1,26 +1,22 @@
 const AppError = require('../utils/AppError');
 
-const handleCastErrorDB = err => {
-    const message = `Invalid ${err.path}: ${err.value}`;
-    return new AppError(message, 400);
+const handleCastErrorDB = () => {
+    return new AppError('0xE000000', 400);
 };
 
-const handleDuplicateFieldsDB = err => {
-    const value = err.errmsg.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
-    const message = `Duplicate field ${value}: Please use another value`;
-    return new AppError(message, 400);
+const handleDuplicateFieldsDB = () => {
+    return new AppError('0xE000001', 400);
 };
 
 const handleValidationErrorDB = err => {
-    const errors = Object.values(err.errors).map(el => el.message);
-    const message = `Invalid input Data${errors.join('. ')}`;
-    return new AppError(message, 400);
+    return new AppError('0xE000002', 400);
 };
 
 const handleWebTokenError =
-    () => new AppError('Invalid log in information', 401);
+    () => new AppError('0xE000003', 401);
+
 const handleJsonWebTokenExpiredError =
-    () => new AppError('You are using an expired token.', 401);
+    () => new AppError('0xE000004', 401);
 
 const sendErrorDevelopment = (err, res) => {
     res.status(err.statusCode).json({
@@ -40,7 +36,7 @@ const sendErrorProduction = (err, res) => {
     } else {
         res.status(500).json({
             status: 'err',
-            message: 'Something went wrong'
+            message: '0xE000005'
         });
     }
 };

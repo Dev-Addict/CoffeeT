@@ -1,0 +1,6 @@
+0xE000000: error in casting value of a field
+0xE000001: the value of a field is already taken
+0xE000002: invalid field
+0xE000003: invalid sign in information
+0xE000004: the sign in token is expired
+0xE000005: something went wrong
