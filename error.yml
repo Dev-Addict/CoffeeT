@@ -4,3 +4,12 @@
 0xE000003: invalid sign in information
 0xE000004: the sign in token is expired
 0xE000005: something went wrong
+0xE000006: An User must have a firstName
+0xE000007: An User must have a valid firstName
+0xE000008: An User must have a lastName
+0xE000009: An User must have a valid lastName
+0xE00000A: An User must have a password
+0xE00000B: An User must have a valid password
+0xE00000C: An User must have a valid rote
+0xE00000D: An User must have a phone
+0xE00000E: An User must have a valid phone
