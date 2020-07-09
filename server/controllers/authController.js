@@ -33,3 +33,23 @@ exports.protect = catchRequest(async (req, res, next) => {
     req.user = user;
     next();
 });
+
+exports.restrictTo = (...rotes) => {
+    return catchRequest(
+        async (req, res, next) => {
+            if (rotes.includes(req.user.rote)) {
+                return next();
+            }
+            if (rotes.includes('selfUser')) {
+                if (req.params.id === req.user._id.toString()) {
+                    return next();
+                }
+            }
+            if (rotes.includes('filterUser')) {
+                req.query.fields += '-phone';
+                return next();
+            }
+            throw new AppError('0xE000012', 403);
+        }
+    );
+};
