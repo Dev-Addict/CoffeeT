@@ -111,3 +111,14 @@ exports.signIn = catchRequest(async (req, res) => {
 
     sendToken(user, 200, res);
 });
+
+exports.isSignedIn = catchRequest(
+    async (req, res) => {
+        res.status(200).json({
+            status: 'success',
+            data: {
+                user: req.user
+            }
+        });
+    }
+);
