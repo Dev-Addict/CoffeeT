@@ -67,7 +67,8 @@ const userSchema = new mongoose.Schema({
         validate: {
             validator: value => /^00989[0-9]{9}$/.test(value),
             message: '0xE00000E'
-        }
+        },
+        unique: [true, '0xE000013']
     },
     isPhoneVerified: {
         type: Boolean,

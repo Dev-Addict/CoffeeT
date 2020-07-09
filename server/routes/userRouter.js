@@ -6,6 +6,7 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.route('/auth/signout').get(authController.signOut);
+router.route('/auth/signin').post(authController.signIn);
 
 router.route('/')
     .get(authController.protect, authController.restrictTo('admin'), userController.getUsers)

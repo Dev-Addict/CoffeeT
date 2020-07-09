@@ -93,3 +93,21 @@ exports.signOut = (req, res) => {
     res.clearCookie('jwt');
     res.status(200).json({status: 'success'})
 };
+
+exports.signIn = catchRequest(async (req, res) => {
+    const {phone, password} = req.body;
+    if (
+        !phone ||
+        !password ||
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/.test(password) ||
+        !/^00989[0-9]{9}$/.test(phone)) {
+        throw new AppError('0xE000014', 400);
+    }
+    const user = await User.findOne({phone}).select('+password');
+
+    if (!user || !(await user.correctPassword(password, user.password))) {
+        throw new AppError('0xE000015', 401);
+    }
+
+    sendToken(user, 200, res);
+});
