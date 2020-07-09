@@ -13,3 +13,6 @@
 0xE00000C: An User must have a valid rote
 0xE00000D: An User must have a phone
 0xE00000E: An User must have a valid phone
+0xE00000F: No token provided
+0xE000010: The token belong to a user that no longer exists
+0xE000011: The user has changed his passowrd after creating the token
