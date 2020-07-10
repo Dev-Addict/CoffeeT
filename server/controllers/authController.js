@@ -122,3 +122,21 @@ exports.isSignedIn = catchRequest(
         });
     }
 );
+
+exports.signUp = catchRequest(
+    async (req, res) => {
+        const user = await User.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            rote: req.body.rote === 'manager' ? 'manager' : 'user',
+            phone: req.body.phone
+        });
+
+        user.createVerifyEmailToken();
+        user.createVerifyPhoneToken();
+
+        sendToken(user, 201, res);
+    }
+);
